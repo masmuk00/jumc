@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  test:
+    docker:
+      - image: mcr.microsoft.com/playwright/python:v1.29.0-focal
+    parallelism: 20
+    steps:
+     - checkout
+     - run: |
+          pip install pytest-playwright
+          playwright install
+          pytest test.py
+
+workflows:
+  version: 2
+  Build1:
+     jobs:
+       - test
